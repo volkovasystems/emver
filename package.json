@@ -1,10 +1,10 @@
 {
   "name": "emver",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Get mongod current version.",
   "main": "emver.js",
   "scripts": {
-	"preinstall": "npm install m --global && m stable",
+    "preinstall": "npm install m --global && m stable",
     "test": "mocha emver-test.js"
   },
   "repository": {
@@ -18,19 +18,22 @@
     "emver"
   ],
   "author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+  "contributors": [
+    "John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/volkovasystems/emver/issues"
   },
   "homepage": "https://github.com/volkovasystems/emver#readme",
   "dependencies": {
-    "clazof": "^0.16.0",
-    "comver": "^0.3.0",
-    "depher": "^0.21.0",
-    "falzy": "^0.16.0",
-    "gnaw": "^0.7.0",
-    "letgo": "^0.21.0",
-    "raze": "^0.23.0",
-    "zelf": "^0.10.0"
+    "clazof": "^0.21.0",
+    "comver": "^0.4.0",
+    "depher": "^0.26.0",
+    "falzy": "^0.17.0",
+    "gnaw": "^0.11.0",
+    "letgo": "^0.25.0",
+    "raze": "^0.25.0",
+    "zelf": "^0.11.0"
   }
 }
