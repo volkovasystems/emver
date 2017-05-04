@@ -1,6 +1,6 @@
 {
   "name": "emver",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Get mongod current version.",
   "main": "emver.js",
   "scripts": {
@@ -27,13 +27,13 @@
   },
   "homepage": "https://github.com/volkovasystems/emver#readme",
   "dependencies": {
-    "clazof": "^0.24.0",
-    "comver": "^0.6.0",
-    "depher": "^0.29.0",
+    "clazof": "^0.25.0",
+    "comver": "^0.7.0",
+    "depher": "^0.30.0",
     "falzy": "^0.19.0",
-    "gnaw": "^0.13.0",
-    "letgo": "^0.27.0",
-    "raze": "^0.27.0",
+    "gnaw": "^0.14.0",
+    "letgo": "^0.28.0",
+    "raze": "^0.29.0",
     "zelf": "^0.11.0"
   }
 }
