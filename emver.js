@@ -34,6 +34,9 @@
 			"file": "emver.js",
 			"module": "emver",
 			"author": "Richeve S. Bebedor",
+			"contributors": [
+				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+			],
 			"eMail": "richeve.bebedor@gmail.com",
 			"repository": "https://github.com/volkovasystems/emver.git",
 			"test": "emver-test.js",
