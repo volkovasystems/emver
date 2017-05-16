@@ -96,24 +96,30 @@ const emver = function emver( synchronous, option ){
 			return version;
 
 		}catch( error ){
-			throw new Error( `mongod version retrieval failed, ${ error.stack }` );
+			throw new Error( `mongod version retrieval failed,
+				${ error.stack }` );
 		}
 
 	}else{
 		return letgo.bind( zelf( this ) )( function later( cache ){
 			return gnaw( "m --stable", option )( function done( error, version ){
 				if( clazof( error, Error ) ){
-					return cache.callback( new Error( `mongod version retrieval failed, ${ error.stack }` ), "" );
+					return cache.callback(
+						new Error( `mongod version retrieval failed,
+						${ error.stack }` ), "" );
 				}
 
 				if( falzy( version ) ){
-					return comver( "mongod" ).execute( option )( function done( error, version ){
-						if( clazof( error, Error ) ){
-							return cache.callback( new Error( `mongod version retrieval failed, ${ error.stack }` ), "" );
-						}
+					return comver( "mongod" ).execute( option )(
+						function done( error, version ){
+							if( clazof( error, Error ) ){
+								return cache.callback(
+									new Error( `mongod version retrieval failed,
+										${ error.stack }` ), "" );
+							}
 
-						return cache.callback( null, version );
-					}, option );
+							return cache.callback( null, version );
+						}, option );
 				}
 
 				return cache.callback( null, version );
