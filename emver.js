@@ -1,5 +1,3 @@
-"use strict";
-
 /*;
 	@module-license:
 		The MIT License (MIT)
@@ -50,24 +48,20 @@
 
 	@include:
 		{
-			"clazof": "clazof",
 			"comver": "comver",
 			"depher": "depher",
 			"falzy": "falzy",
 			"gnaw": "gnaw",
-			"letgo": "letgo",
 			"raze": "raze",
 			"zelf": "zelf"
 		}
 	@end-include
 */
 
-const clazof = require( "clazof" );
 const comver = require( "comver" );
 const depher = require( "depher" );
 const falzy = require( "falzy" );
 const gnaw = require( "gnaw" );
-const letgo = require( "letgo" );
 const raze = require( "raze" );
 const zelf = require( "zelf" );
 
@@ -82,7 +76,9 @@ const emver = function emver( synchronous, option ){
 	*/
 
 	let parameter = raze( arguments );
+
 	synchronous = depher( parameter, BOOLEAN, false );
+
 	option = depher( parameter, OBJECT, { } );
 
 	if( synchronous ){
@@ -96,35 +92,32 @@ const emver = function emver( synchronous, option ){
 			return version;
 
 		}catch( error ){
-			throw new Error( `mongod version retrieval failed,
-				${ error.stack }` );
+			throw new Error( `cannot get mongod version, ${ error.stack }` );
 		}
 
 	}else{
-		return letgo.bind( zelf( this ) )( function later( cache ){
-			return gnaw( "m --stable", option )( function done( error, version ){
-				if( clazof( error, Error ) ){
-					return cache.callback(
-						new Error( `mongod version retrieval failed,
-						${ error.stack }` ), "" );
-				}
+		let catcher = gnaw( "m --stable", option )
+			.push( function done( error, version ){
+				if( error instanceof Error ){
+					return catcher.pass( new Error( `cannot get mongod version, ${ error.stack }` ), "" );
 
-				if( falzy( version ) ){
-					return comver( "mongod" ).execute( option )(
-						function done( error, version ){
-							if( clazof( error, Error ) ){
-								return cache.callback(
-									new Error( `mongod version retrieval failed,
-										${ error.stack }` ), "" );
+				}else if( falzy( version ) ){
+					comver( "mongod" ).execute( option )
+						.then( function done( error, version ){
+							if( error instanceof Error ){
+								return catcher.pass( new Error( `cannot get mongod version, ${ error.stack }` ), "" );
+
+							}else{
+								return catcher.pass( null, version );
 							}
+						} );
 
-							return cache.callback( null, version );
-						}, option );
+				}else{
+					return catcher.pass( null, version );
 				}
-
-				return cache.callback( null, version );
 			} );
-		} );
+
+		return catcher;
 	}
 };
 
